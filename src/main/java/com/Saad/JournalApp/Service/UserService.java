@@ -4,24 +4,23 @@ import com.Saad.JournalApp.Repository.UserEntryRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Optional;
 
 @Component
-public class UserEntryService {
+public class UserService {
     @Autowired
     private UserEntryRepository userEntryRepository;
-    public void saveEntry(UserEntry userEntry) {
+    public void saveUser(UserEntry userEntry) {
         userEntryRepository.save(userEntry);
     }
-    public List<UserEntry> getAll(){
+    public List<UserEntry> getAllUsers(){
         return userEntryRepository.findAll();
     }
-    public Optional<UserEntry> findById(ObjectId id) {
+    public Optional<UserEntry> findUserById(ObjectId id) {
         return userEntryRepository.findById(id);
     }
-    public void deleteById(ObjectId id) {
+    public void deleteUserByUsername(ObjectId id) {
         userEntryRepository.deleteById(id);
     }
     public UserEntry findByUsername(String userEntry) {

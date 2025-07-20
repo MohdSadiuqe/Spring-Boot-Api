@@ -1,7 +1,7 @@
 package com.Saad.JournalApp.Controller;
 
 import com.Saad.JournalApp.Entity.UserEntry;
-import com.Saad.JournalApp.Service.UserEntryService;
+import com.Saad.JournalApp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,28 +10,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/user")
-public class UserEntryController {
+public class UserController {
     @Autowired
-    private UserEntryService userEntryService;
+    private UserService userService;
 
     @GetMapping
-    public List<UserEntry> getUser(){
-        return userEntryService.getAll();
+    public List<UserEntry> getAllUsers(){
+        return userService.getAllUsers();
     }
 
     @PostMapping
     public void createUser(@RequestBody UserEntry userEntry) {
-        userEntryService.saveEntry(userEntry);
+        userService.saveUser(userEntry);
     }
 
     @PutMapping("/{username}")
-    public ResponseEntity<?> updateById(@RequestBody UserEntry userEntry, @PathVariable String username) {
-        UserEntry UserInDb = userEntryService.findByUsername(username);
-        if(UserInDb != null){
+    public ResponseEntity<?> updateUserByUsername(@RequestBody UserEntry userEntry, @PathVariable String username) {
+        UserEntry UserInDb = userService.findByUsername(username);
+        if (UserInDb != null) {
             UserInDb.setUsername(userEntry.getUsername());
             UserInDb.setPassword(userEntry.getPassword());
-            userEntryService.saveEntry(UserInDb);
-            return new ResponseEntity<>(UserInDb,HttpStatus.OK);
+            userService.saveUser(UserInDb);
+            return new ResponseEntity<>(UserInDb, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
