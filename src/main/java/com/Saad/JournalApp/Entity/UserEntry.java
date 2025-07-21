@@ -18,5 +18,6 @@ public class UserEntry {
     public String username;
     @NonNull
     public String password;
+    public List<String> roles;
     private List<JournalEntry>journalEntries=new ArrayList<>();
 }
